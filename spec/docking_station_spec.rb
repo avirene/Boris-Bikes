@@ -1,6 +1,7 @@
 require './lib/docking_station'
 describe DockingStation do
   let(:bike) { Bike.new } # bike = Bike.new
+  
   describe '#release_bike' do
     it 'releases a bike' do
       subject.dock(bike)
@@ -20,22 +21,16 @@ describe DockingStation do
     expect(bike).to be_working
   end
 
-  # it { is_expected.to respond_to(:dock).with(1).argument }
-  it 'docks something' do
-    expect(subject.dock(bike)).to eq bike
-  end
-  
   # it { is_expected.to respond_to(:bike) }
   
-  it 'returns docked bikes' do
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
-  end
+    it 'returns docked bikes' do
+      subject.dock(bike)
+      expect(subject.bike).to eq bike
+    end
   
-  it "can only dock 20 bikes" do
-    docking_station = DockingStation.new
-    20.times {docking_station.dock(Bike.new)}
-    expect { docking_station.dock(bike) }.to raise_error "Station is full"
-  end
+    it "can only dock 20 bikes" do
+      20.times {subject.dock(Bike.new)}
+      expect { subject.dock(bike) }.to raise_error "Station is full"
+    end
   
 end
